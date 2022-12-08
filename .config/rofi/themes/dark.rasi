@@ -1,0 +1,44 @@
+* {
+    /* Theme settings */
+    highlight: bold italic;
+    scrollbar: false;
+
+    /* Gruvbox dark colors */
+    dark-black:        #000000;
+    dark-green:        #A2DA51;
+    dark-red-dark:     #DA5151;
+    dark-red-light:    #DAA2A2;
+    dark-yellow-dark:  #DADA51;
+    dark-yellow-light: #DADAA2;
+
+    /* Theme colors */
+    background:                  @dark-black;
+    background-color:            @background;
+    foreground:                  @dark-green;
+    border-color:                @dark-green;
+    separatorcolor:              @border-color;
+    scrollbar-handle:            @border-color;
+
+    normal-background:           @background;
+    normal-foreground:           @foreground;
+    alternate-normal-background: @dark-black;
+    alternate-normal-foreground: @foreground;
+    selected-normal-background:  @dark-green;
+    selected-normal-foreground:  @dark-black;
+
+    active-background:           @dark-yellow-dark;
+    active-foreground:           @background;
+    alternate-active-background: @active-background;
+    alternate-active-foreground: @active-foreground;
+    selected-active-background:  @dark-yellow-light;
+    selected-active-foreground:  @active-foreground;
+
+    urgent-background:           @dark-red-dark;
+    urgent-foreground:           @background;
+    alternate-urgent-background: @urgent-background;
+    alternate-urgent-foreground: @urgent-foreground;
+    selected-urgent-background:  @dark-red-light;
+    selected-urgent-foreground:  @urgent-foreground;
+}
+
+@import "gruvbox-common.rasi"

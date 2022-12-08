@@ -1,0 +1,33 @@
+general {
+	markup = "pango"
+	color_good = "#A2DA51"
+	color_degraded = "#DAA251"
+	color_bad = "#DAA2A2"
+}
+
+order += "wireless _first_"
+order += "battery 0"
+order += "tztime local"
+order += "read_file hostname"
+
+wireless _first_ {
+	format_up = "%ip %essid %quality %bitrate"
+	format_down = "W: down"
+	format_quality = "%02d%s"
+}
+
+battery 0 {
+	format = "%status %percentage %remaining %consumption"
+	last_full_capacity = true
+	low_threshold = 30
+	threshold_type = time
+}
+
+tztime local {
+	format = "<span color='#DADAA2'>%Y-%m-%d %H:%M:%S</span>"
+}
+
+read_file hostname {
+	path = "/etc/hostname"
+	color_good = "#A2DADA"
+}

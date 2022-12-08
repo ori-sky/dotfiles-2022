@@ -1,0 +1,25 @@
+@theme "dark"
+
+configuration {
+	font: "PragmataPro Mono Liga bold 10";
+	location: 1;
+	fixed-num-lines: false;
+	show-icons: true;
+	dpi: ${DPI};
+	timeout {
+		action: "kb-cancel";
+		delay:  0;
+	}
+	filebrowser {
+		directories-first: true;
+		sorting-method:    "name";
+	}
+}
+
+window {
+	width: 100%;
+}
+
+listview {
+	lines: 10;
+}

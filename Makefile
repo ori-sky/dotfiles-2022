@@ -1,39 +1,66 @@
 .PHONY: all
-all: bash compton gtk mutt
+all: bash compton gtk i3 i3status libinput-gestures mutt rofi xresources
+
+.PHONY: var-%
+var-%:
+	@[ -n "$$$*" ] || { echo 'variable required: $$$*' ; exit 1; }
 
 .PHONY: bash
 bash: ~/.bash_profile
 
 ~/.bash_profile: .bash_profile
-	install -Dv $< $@
+	install -D $< $@
 
 .PHONY: compton
 compton: ~/.config/compton.conf
 
 ~/.config/compton.conf: .config/compton.conf
-	install -Dv $< $@
+	install -D $< $@
 
 .PHONY: gtk
 gtk: ~/.config/gtk-3.0/settings.ini
 
 ~/.config/gtk-3.0/settings.ini: .config/gtk-3.0/settings.ini
-	install -Dv $< $@
+	install -D $< $@
+
+.PHONY: i3
+i3: ~/.config/i3/config
+
+~/.config/i3/config: .config/i3/config
+	install -D $< $@
+
+.PHONY: i3status
+i3status: ~/.config/i3status/config
+
+~/.config/i3status/config: .config/i3status/config
+	install -D $< $@
+
+.PHONY: libinput-gestures
+libinput-gestures: ~/.config/libinput-gestures.conf
+
+~/.config/libinput-gestures.conf: .config/libinput-gestures.conf
+	install -D $< $@
 
 .PHONY: mutt
 mutt: ~/.mutt/mailcap ~/.muttrc
 
 ~/.mutt/mailcap: .mutt/mailcap
-	install -Dv $< $@
+	install -D $< $@
 
-.PHONY: ~/.muttrc
-~/.muttrc: .muttrc
-	@[ -n "$$EDITOR"         ] || { echo 'variable required: $$EDITOR'        ; exit 1; }
-	@[ -n "$$MUTT_FROM"      ] || { echo 'variable required: $$MUTT_FROM'     ; exit 1; }
-	@[ -n "$$MUTT_NAME"      ] || { echo 'variable required: $$MUTT_NAME'     ; exit 1; }
-	@[ -n "$$MUTT_SMTP_URL"  ] || { echo 'variable required: $$MUTT_SMTP_URL' ; exit 1; }
-	@[ -n "$$MUTT_SMTP_USER" ] || { echo 'variable required: $$MUTT_SMTP_USER'; exit 1; }
-	@[ -n "$$MUTT_SMTP_PASS" ] || { echo 'variable required: $$MUTT_SMTP_PASS'; exit 1; }
-	@[ -n "$$MUTT_IMAP_URL"  ] || { echo 'variable required: $$MUTT_IMAP_URL' ; exit 1; }
-	@[ -n "$$MUTT_IMAP_USER" ] || { echo 'variable required: $$MUTT_IMAP_USER'; exit 1; }
-	@[ -n "$$MUTT_IMAP_PASS" ] || { echo 'variable required: $$MUTT_IMAP_PASS'; exit 1; }
-	envsubst < $< > $@
+~/.muttrc: .muttrc var-EDITOR var-MUTT_FROM var-MUTT_NAME var-MUTT_SMTP_URL var-MUTT_SMTP_USER var-MUTT_SMTP_PASS var-MUTT_IMAP_URL var-MUTT_IMAP_USER var-MUTT_IMAP_PASS
+	install -D <(envsubst < $<) $@
+
+.PHONY: rofi
+rofi: ~/.config/rofi/config.rasi ~/.config/rofi/themes/dark.rasi
+
+~/.config/rofi/config.rasi: .config/rofi/config.rasi var-DPI
+	install -D <(envsubst < $<) $@
+
+~/.config/rofi/themes/dark.rasi: .config/rofi/themes/dark.rasi
+	install -D $< $@
+
+.PHONY: xresources
+xresources: ~/.Xresources
+
+~/.Xresources: .Xresources var-DPI
+	install -D <(envsubst < $<) $@
