@@ -6,9 +6,12 @@ var-%:
 	@[ -n "$$$*" ] || { echo 'variable required: $$$*' ; exit 1; }
 
 .PHONY: bash
-bash: ~/.bash_profile
+bash: ~/.bash_profile ~/.bashrc
 
 ~/.bash_profile: .bash_profile
+	install -D $< $@
+
+~/.bashrc: .bashrc
 	install -D $< $@
 
 .PHONY: compton
