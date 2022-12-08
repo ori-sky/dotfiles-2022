@@ -2,7 +2,7 @@
 all: mutt
 
 .PHONY: mutt
-mutt: ~/.muttrc
+mutt: ~/.muttrc ~/.mutt/mailcap
 
 .PHONY: ~/.muttrc
 ~/.muttrc: .muttrc
@@ -16,3 +16,6 @@ mutt: ~/.muttrc
 	@[ -n "$$MUTT_IMAP_USER" ] || { echo 'variable required: $$MUTT_IMAP_USER'; exit 1; }
 	@[ -n "$$MUTT_IMAP_PASS" ] || { echo 'variable required: $$MUTT_IMAP_PASS'; exit 1; }
 	envsubst < $< > $@
+
+~/.mutt/mailcap: .mutt/mailcap
+	install -Dv $< $@
