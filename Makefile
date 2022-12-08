@@ -1,8 +1,23 @@
 .PHONY: all
-all: mutt
+all: compton gtk mutt
+
+.PHONY: compton
+compton: ~/.config/compton.conf
+
+~/.config/compton.conf: .config/compton.conf
+	install -Dv $< $@
+
+.PHONY: gtk
+gtk: ~/.config/gtk-3.0/settings.ini
+
+~/.config/gtk-3.0/settings.ini: .config/gtk-3.0/settings.ini
+	install -Dv $< $@
 
 .PHONY: mutt
-mutt: ~/.muttrc ~/.mutt/mailcap
+mutt: ~/.mutt/mailcap ~/.muttrc
+
+~/.mutt/mailcap: .mutt/mailcap
+	install -Dv $< $@
 
 .PHONY: ~/.muttrc
 ~/.muttrc: .muttrc
@@ -16,6 +31,3 @@ mutt: ~/.muttrc ~/.mutt/mailcap
 	@[ -n "$$MUTT_IMAP_USER" ] || { echo 'variable required: $$MUTT_IMAP_USER'; exit 1; }
 	@[ -n "$$MUTT_IMAP_PASS" ] || { echo 'variable required: $$MUTT_IMAP_PASS'; exit 1; }
 	envsubst < $< > $@
-
-~/.mutt/mailcap: .mutt/mailcap
-	install -Dv $< $@
