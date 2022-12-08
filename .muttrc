@@ -1,0 +1,30 @@
+set from = "${MUTT_FROM}"
+set realname = "${MUTT_NAME}"
+
+set smtp_url = "smtps://${MUTT_SMTP_USER}@${MUTT_SMTP_URL}"
+set smtp_pass = "${MUTT_SMTP_PASS}"
+
+set imap_user = "${MUTT_IMAP_USER}"
+set imap_pass = "${MUTT_IMAP_PASS}"
+
+set folder="imaps://${MUTT_IMAP_URL}"
+set spoolfile = "+INBOX"
+
+set header_cache = "~/.mutt/cache/headers"
+set message_cachedir = "~/.mutt/cache/bodies"
+set certificate_file = "~/.mutt/certificates"
+
+set mail_check = 300
+set move = no
+set imap_keepalive = 900
+set sort = threads
+set editor = "${EDITOR}"
+
+set ssl_starttls = yes
+
+set mailcap_path = ~/.mutt/mailcap
+
+alternative_order text/plain text/enriched text/html
+auto_view text/html
+
+color status color154 color0
