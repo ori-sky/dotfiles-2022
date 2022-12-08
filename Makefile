@@ -1,5 +1,11 @@
 .PHONY: all
-all: compton gtk mutt
+all: bash compton gtk mutt
+
+.PHONY: bash
+bash: ~/.bash_profile
+
+~/.bash_profile: .bash_profile
+	install -Dv $< $@
 
 .PHONY: compton
 compton: ~/.config/compton.conf
