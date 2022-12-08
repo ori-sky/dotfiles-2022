@@ -1,5 +1,5 @@
 .PHONY: all
-all: bash compton gtk i3 i3status libinput-gestures mutt rofi xresources
+all: bash compton gtk i3 i3status libinput-gestures mutt rofi xfce-terminal xresources
 
 .PHONY: var-%
 var-%:
@@ -57,6 +57,12 @@ rofi: ~/.config/rofi/config.rasi ~/.config/rofi/themes/dark.rasi
 	install -D <(envsubst < $<) $@
 
 ~/.config/rofi/themes/dark.rasi: .config/rofi/themes/dark.rasi
+	install -D $< $@
+
+.PHONY: xfce-terminal
+xfce-terminal: ~/.config/xfce4/terminal/terminalrc
+
+~/.config/xfce4/terminal/terminalrc: .config/xfce4/terminal/terminalrc
 	install -D $< $@
 
 .PHONY: xresources
