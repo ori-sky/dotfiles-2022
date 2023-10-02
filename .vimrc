@@ -1,4 +1,4 @@
-#execute pathogen#infect()
+"#execute pathogen#infect()
 
 " 256 colors
 set t_Co=256
@@ -56,4 +56,4 @@ if filereadable(lvimrc_path)
 	execute 'so' lvimrc_path
 endif
 
-colorscheme elflord
+colorscheme industry
